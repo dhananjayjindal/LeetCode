@@ -17,13 +17,10 @@ public:
         for (i=0;i<n;i++)
             for (j=0;j<m;j++)
                if(copyMatrix[i][j]==0)
-                   mp[pair<int, int>(i,j)]++;
-                   // setToZero(matrix,i,j,n,m);
+                   // mp[pair<int, int>(i,j)]++;
+                   setToZero(matrix,i,j,m,n);
                
-        for(auto ma:mp){
-         setToZero(matrix,(ma.first).first,(ma.first).second,m,n); 
-            
-        }
+        // for(auto ma:mp){setToZero(matrix,(ma.first).first,(ma.first).second,m,n); }
         
 
     
