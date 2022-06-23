@@ -44,6 +44,6 @@ public:
             temp2 = temp2->next;
             if(temp1 == NULL || temp2 == NULL) return NULL;
         }
-        return temp1;
+        return temp2;
     }
 };
