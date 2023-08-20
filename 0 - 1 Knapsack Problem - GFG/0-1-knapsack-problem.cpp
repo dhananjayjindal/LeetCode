@@ -7,30 +7,48 @@ using namespace std;
 class Solution
 {
     
-    int f(int ind ,int W ,int wt[],int val[],vector<vector<int>>& dp ){
-        if (ind ==0) 
-        {
-            if (wt[0]<=W)  
-                return val[0];
-            else 
-                return 0;
-        }
-        if (dp[ind][W]!=-1) return dp[ind][W];
-        int not_take = 0 + f(ind-1,W,wt,val,dp);
-        int take = INT_MIN;
-        if (wt[ind]<=W)
-        take = val[ind] + f(ind-1,W-wt[ind],wt,val,dp);
+    // int f(int ind ,int W ,int wt[],int val[],vector<vector<int>>& dp ){
+    //     if (ind ==0) 
+    //     {
+    //         if (wt[0]<=W)  
+    //             return val[0];
+    //         else 
+    //             return 0;
+    //     }
+    //     if (dp[ind][W]!=-1) return dp[ind][W];
+    //     int not_take = 0 + f(ind-1,W,wt,val,dp);
+    //     int take = INT_MIN;
+    //     if (wt[ind]<=W)
+    //     take = val[ind] + f(ind-1,W-wt[ind],wt,val,dp);
         
-        return dp[ind][W]=max(take , not_take);
-    }
+    //     return dp[ind][W]=max(take , not_take);
+    // }
     
     public:
     //Function to return max value that can be put in knapsack of capacity W.
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
-       vector<vector<int>> dp(n,vector<int>(W+1,-1));
-       return f(n-1,W,wt,val,dp);
+       vector<int> prev(W+1,0),curr(W+1,0);
+    //   vector<vector<int>> dp(n,vector<int>(W+1,0));
+       for (int w = wt[0];w<=W;w++)
+       prev[w]=val[0];
+       
+       for(int i=1;i<n;i++){
+           for(int j=0;j<=W;j++){
+                
+                int not_take = 0 + prev[j];
+                int take = INT_MIN;
+                if (wt[i]<=j)
+                take = val[i] + prev[j-wt[i]];
+                
+                curr[j]=max(take , not_take);
+               
+           }
+           prev = curr;
+       }
+       
+       return prev[W];
     }
 };
 
